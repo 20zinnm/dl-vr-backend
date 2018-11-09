@@ -8,12 +8,15 @@ message EvaluateRequest {
 
 message Layer {
     oneof definition {
-        ConvLayer conv = 1;
+        ConvolutionLayer convolution = 1;
         DropoutLayer dropout = 2;
+        FlattenLayer flatten = 3;
+        DenseLayer dense = 4;
+        MaxpoolingLayer maxpooling = 5;
     };
 }
 
-message ConvLayer {
+message ConvolutionLayer {
     int64 filters = 1;
 }
 
@@ -22,8 +25,19 @@ message DropoutLayer {
     float dimension = 1;
 }
 
+message FlattenLayer {
+}
+
+message DenseLayer {
+    int32 neurons = 1;
+}
+
+message MaxpoolingLayer {
+}
+
 message ProgressUpdate {
     float accuracy = 1;
+    int32 epochs = 2;
 }
 
 service Evaluator {
