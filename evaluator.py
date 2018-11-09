@@ -9,11 +9,16 @@ class Evaluator(evaluator_pb2_grpc.EvaluatorServicer):
             typ = request.WhichOneof("definition")
             if (typ == None):
                 continue
+
             if (typ == "convolution"):
                 # do something here
                 conv = layer.convolution
                 # conv.filters
+            elif (typ == "dropout"):
+                # do something here
+            elif (typ == "flatten"):
 
+                
         # train the model
 
         # send progress updates
