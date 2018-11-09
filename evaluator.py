@@ -1,8 +1,11 @@
 import evaluator_pb2
 import evaluator_pb2_grpc
 import grpc
+from concurrent import futures
+import time
+_ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
-class Evaluator(protocol_pb2_grpc.EvaluatorService):
+class Evaluator(evaluator_pb2_grpc.EvaluatorServicer):
     def Evaluate(self, request, context):
         # build Keras model
         for layer in request.layers:
@@ -18,7 +21,7 @@ class Evaluator(protocol_pb2_grpc.EvaluatorService):
         # train the model
 
         # send progress updates
-        # yield protocol_pb2.ProgressUpdate(accuracy = 1)
+        # yield evaluator_pb2_grpc.ProgressUpdate(accuracy = 1)
         
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
