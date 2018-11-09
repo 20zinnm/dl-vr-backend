@@ -5,7 +5,7 @@ class Evaluator(evaluator_pb2_grpc.EvaluatorServicer):
     def Evaluate(self, request, context):
         # build Keras model
         for layer in request.layers:
-            layer = protocol_pb2.Layer(layer)
+            layer = evaluator_pb2.Layer(layer)
             typ = request.WhichOneof("definition")
             if (typ == None):
                 continue
